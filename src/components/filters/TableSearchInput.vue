@@ -2,7 +2,7 @@
     <input
         v-model="modelValue"
         type="text"
-        class="px-3 py-2.5 transition-shadow duration-300 rounded-lg bg-primary focus:outline-none focus:ring-1 ring-offset-2 ring-appPrimary ring-offset-background lg:min-w-56 placeholder:text-neutral-400 placeholder:font-light"
+        class="px-3 py-2.5 transition-shadow duration-300 rounded-lg bg-primary focus:outline-none focus:ring-1 ring-offset-2 ring-appPrimary ring-offset-background lg:min-w-56 placeholder:text-neutral-400"
         placeholder="Search"
     />
 </template>

@@ -1,6 +1,6 @@
 <template>
     <div
-        class="px-5 py-3 ak-table__row gap-x-5 hover:bg-dark transition-colors rounded-xl font-light"
+        class="px-5 py-3 transition-colors ak-table__row gap-x-5 hover:bg-dark rounded-xl"
         style="
             display: grid;
             grid-template-columns: 0.5fr 0.5fr 0.75fr 1.5fr 1fr 1.5fr;

@@ -1,6 +1,9 @@
 <template>
     <TableSearchInput class="mb-3" />
-    <div class="flex items-center font-light text-neutral-400 gap-x-1.5" style="pointer-events: auto">
+    <div
+        class="flex items-center text-neutral-400 gap-x-1.5"
+        style="pointer-events: auto"
+    >
         <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

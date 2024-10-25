@@ -1,6 +1,6 @@
 <template>
     <div
-        class="font-light cursor-pointer text-neutral-400 min-w-16"
+        class="cursor-pointer text-neutral-400 min-w-16"
         @click="tableStore.sortTable(sortKey as any)"
     >
         <span class="relative">
