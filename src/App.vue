@@ -1,5 +1,5 @@
 <template>
-    <div class="flex justify-center px-4 mt-24 text-white md:px-24">
+    <div class="flex justify-center px-4 mt-24 text-white md:px-24 font-light">
         <div class="w-full">
             <TableFilters />
             <TableComponent />
