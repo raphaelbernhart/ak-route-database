@@ -1,18 +1,19 @@
 <template>
     <div
-        class="cursor-pointer text-neutral-400 min-w-16"
+        class="cursor-pointer text-neutral-400"
+        :style="`min-width: ${minWidth || '40px'};`"
         @click="tableStore.sortTable(sortKey as any)"
     >
-        <span class="relative">
-            {{ label }}
-            <span
-                class="absolute transition-opacity duration-500 opacity-0 -right-6"
+        <div class="relative flex justify-start gap-x-1">
+            <div>{{ label }}</div>
+            <div
+                class="transition-opacity duration-500 opacity-0"
                 :class="{ 'opacity-100': tableStore.sort.sortKey === sortKey }"
             >
                 <ChevronDownIcon v-if="tableStore.sort.isDesc" class="w-5" />
                 <ChevronUpIcon v-else class="w-5" />
-            </span>
-        </span>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -38,6 +39,10 @@ const props = defineProps({
         default: false,
     },
     sortKey: {
+        type: String,
+        default: '',
+    },
+    minWidth: {
         type: String,
         default: '',
     },

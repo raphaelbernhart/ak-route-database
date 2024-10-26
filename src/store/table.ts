@@ -6,40 +6,46 @@ export const useTableStore = defineStore('table', () => {
     const tableStructure = ref({
         boltline: {
             key: 'Boltlinje',
-            name: 'Boltlinje',
+            name: 'Linje',
             sortable: true,
+            minWidth: '40px',
         },
         grade: {
             key: 'Grad',
             name: 'Grad',
             sortable: true,
+            minWidth: '40px',
         },
         color: {
             key: 'Farve',
             name: 'Farve',
             sortable: false,
+            minWidth: '60px',
         },
         routename: {
             key: 'Rutenavn',
             name: 'Rutenavn',
             sortable: true,
+            minWidth: '100px',
         },
         constructionDate: {
             key: 'Byggedato',
             name: 'Byggedato',
             sortable: true,
+            minWidth: '90px',
         },
         routeBuilder: {
             key: 'Rutebygger',
             name: 'Rutebygger',
             sortable: false,
+            minWidth: '120px',
         },
     });
     const tableEntries = ref([]) as Ref<Array<any>>;
     const searchValue = ref('');
     const sort = ref({
-        sortKey: '',
-        isDesc: false,
+        sortKey: 'constructionDate' as keyof typeof tableStructure.value,
+        isDesc: true,
     });
     const loading = ref(true);
 
@@ -58,6 +64,30 @@ export const useTableStore = defineStore('table', () => {
                     .includes(`${value}`.toLowerCase());
             });
         });
+    });
+    const sortedAndFilteredTable = computed(() => {
+        let clonedEntries = JSON.parse(JSON.stringify(filteredTable.value));
+
+        // Date sorting
+        if (sort.value.sortKey === 'constructionDate') {
+            clonedEntries = sortBasedOnDate(clonedEntries, sort.value.isDesc);
+            return clonedEntries;
+        }
+
+        // Default sort
+        clonedEntries.sort(
+            (rowA: Record<string, any>, rowB: Record<string, any>) => {
+                const sortEntryKey =
+                    tableStructure.value[sort.value.sortKey].key;
+
+                if (rowA[sortEntryKey] > rowB[sortEntryKey]) {
+                    return sort.value.isDesc ? -1 : 1;
+                }
+                return sort.value.isDesc ? 1 : -1;
+            },
+        );
+
+        return clonedEntries;
     });
 
     // Methods
@@ -81,42 +111,22 @@ export const useTableStore = defineStore('table', () => {
         // Populate table data
         tableEntries.value = [...tableData];
 
-        // Sort table based on Bygge Dato
-        sortTable('constructionDate');
-
         loading.value = false;
     };
     const sortTable = (
         columnKey: keyof typeof tableStructure.value = 'constructionDate',
     ) => {
-        // Change sortKey
-        sort.value.sortKey = columnKey;
-
         // Change to DESC if
         const isSameSortKey = sort.value.sortKey === columnKey;
+
+        // Change sortKey
+        sort.value.sortKey = columnKey;
 
         if (sort.value.isDesc !== undefined && isSameSortKey === false) {
             sort.value.isDesc = false;
         } else {
             sort.value.isDesc = !sort.value.isDesc;
         }
-
-        // Date sorting
-        if (columnKey === 'constructionDate') {
-            tableEntries.value = sortBasedOnDate(
-                tableEntries.value,
-                sort.value.isDesc,
-            );
-            return;
-        }
-
-        // Default sort
-        tableEntries.value.sort((rowA, rowB) => {
-            if (rowA[columnKey] > rowB[columnKey]) {
-                return sort.value.isDesc ? -1 : 1;
-            }
-            return sort.value.isDesc ? 1 : -1;
-        });
     };
 
     return {
@@ -126,6 +136,7 @@ export const useTableStore = defineStore('table', () => {
         sort,
         loading,
         filteredTable,
+        sortedAndFilteredTable,
         fetchTableEntries,
         sortTable,
     };

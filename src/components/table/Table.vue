@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="w-full overflow-scroll">
         <div id="table" class="ak-table" style="pointer-events: auto">
             <TableHeader class="mt-6" />
 
@@ -18,7 +18,7 @@
                 class="grid grid-cols-1 gap-1 mt-2"
             >
                 <TableBodyRow
-                    v-for="(tableRow, index) in tableStore.filteredTable"
+                    v-for="(tableRow, index) in tableStore.sortedAndFilteredTable"
                     :key="getRowKey(tableRow, index)"
                     :id="tableRow[tableStore.tableStructure.routename.key]"
                     :cells="tableRow"

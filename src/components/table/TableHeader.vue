@@ -1,6 +1,6 @@
 <template>
     <div
-        class="w-full px-5 py-3 rounded-xl bg-secondary gap-x-5"
+        class="w-full px-5 py-3 rounded-xl bg-secondary gap-x-6"
         style="
             display: grid;
             grid-template-columns: 0.5fr 0.5fr 0.75fr 1.5fr 1fr 1.5fr;
@@ -13,6 +13,7 @@
             :data-key="tableHeader.key"
             :sortable="tableHeader.sortable"
             :sort-key="tableHeaderId"
+            :min-width="tableHeader.minWidth"
         />
     </div>
 </template>
