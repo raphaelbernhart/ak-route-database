@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-secondary rounded-xl inline-block">
+    <div class="bg-secondary rounded-xl inline-block md:block">
         <div
             class="px-5 py-3 gap-x-6"
             style="
