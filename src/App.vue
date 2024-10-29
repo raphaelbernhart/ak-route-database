@@ -8,7 +8,7 @@
     <div
         class="fixed p-1 right-2 bottom-2 gap-x-1 text-neutral-400 bg-neutral-800 rounded-xl"
     >
-        <div class="-rotate-90 animate-pulse">
+        <div class="lg:hidden -rotate-90 animate-pulse">
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="20"
