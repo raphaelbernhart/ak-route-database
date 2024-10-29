@@ -1,4 +1,4 @@
-import { sortBasedOnDate } from '@/helpers/sort';
+import { sortBasedOnDate, sortBoltLine, sortDefault } from '@/helpers/sort';
 import { defineStore } from 'pinia';
 import { computed, ref, type Ref } from 'vue';
 
@@ -6,7 +6,7 @@ export const useTableStore = defineStore('table', () => {
     const tableStructure = ref({
         boltline: {
             key: 'Boltlinje',
-            name: 'Linje',
+            name: '#',
             sortable: true,
             minWidth: '40px',
         },
@@ -70,21 +70,23 @@ export const useTableStore = defineStore('table', () => {
 
         // Date sorting
         if (sort.value.sortKey === 'constructionDate') {
-            clonedEntries = sortBasedOnDate(clonedEntries, sort.value.isDesc);
-            return clonedEntries;
+            return sortBasedOnDate(clonedEntries, sort.value.isDesc);
+        }
+
+        // Bolt line sorting
+        if (sort.value.sortKey === 'boltline') {
+            return sortBoltLine(
+                clonedEntries,
+                tableStructure.value[sort.value.sortKey].key,
+                sort.value.isDesc,
+            );
         }
 
         // Default sort
-        clonedEntries.sort(
-            (rowA: Record<string, any>, rowB: Record<string, any>) => {
-                const sortEntryKey =
-                    tableStructure.value[sort.value.sortKey].key;
-
-                if (rowA[sortEntryKey] > rowB[sortEntryKey]) {
-                    return sort.value.isDesc ? -1 : 1;
-                }
-                return sort.value.isDesc ? 1 : -1;
-            },
+        clonedEntries = sortDefault(
+            clonedEntries,
+            tableStructure.value[sort.value.sortKey].key,
+            sort.value.isDesc,
         );
 
         return clonedEntries;

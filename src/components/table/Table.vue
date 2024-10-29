@@ -15,7 +15,7 @@
                     tableStore.tableEntries.length > 0 &&
                     tableStore.loading === false
                 "
-                class="grid grid-cols-1 gap-1 mt-2"
+                class="inline-flex flex-col grid-cols-1 gap-1 mt-2"
             >
                 <TableBodyRow
                     v-for="(tableRow, index) in tableStore.sortedAndFilteredTable"

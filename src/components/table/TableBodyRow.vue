@@ -1,27 +1,29 @@
 <template>
-    <div
-        class="px-5 py-3 transition-colors ak-table__row gap-x-6 hover:bg-dark focus:bg-dark active:bg-dark rounded-xl"
-        style="
-            display: grid;
-            grid-template-columns: 0.5fr 0.5fr 0.75fr 1.5fr 1fr 1.5fr;
-        "
-    >
+    <div class="inline-block transition-colors hover:bg-dark focus:bg-dark active:bg-dark rounded-xl">
         <div
-            v-for="(tableStructure, columnKey) in tableStore.tableStructure"
-            :key="columnKey"
-            class="flex items-center max-md:break-all gap-x-1.5"
-            :style="`min-width: ${tableStructure.minWidth || '40px'};`"
+            class="px-5 py-3 gap-x-6"
+            style="
+                display: grid;
+                grid-template-columns: 0.5fr 0.5fr 0.75fr 1.5fr 1fr 1.5fr;
+            "
         >
             <div
-                v-if="columnKey === 'color'"
-                :class="[
-                    `w-2.5 h-2.5 rounded-full ${routeColorClass}`,
-                    { 'bg-neutral-700': !routeColorClass },
-                ]"
-            />
-            <span>
-                {{ getCellLabel(cells[tableStructure.key], columnKey) }}
-            </span>
+                v-for="(tableStructure, columnKey) in tableStore.tableStructure"
+                :key="columnKey"
+                class="flex items-center max-md:break-all gap-x-1.5"
+                :style="`min-width: ${tableStructure.minWidth || '40px'};`"
+            >
+                <div
+                    v-if="columnKey === 'color'"
+                    :class="[
+                        `w-2.5 h-2.5 rounded-full ${routeColorClass}`,
+                        { 'bg-neutral-700': !routeColorClass },
+                    ]"
+                />
+                <span>
+                    {{ getCellLabel(cells[tableStructure.key], columnKey) }}
+                </span>
+            </div>
         </div>
     </div>
 </template>
